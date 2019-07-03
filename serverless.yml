@@ -1,0 +1,9 @@
+service: aws-nodejs
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+functions:
+  intersectSorted:
+    handler: libs/js/handlers/qmac.intersectSorted
