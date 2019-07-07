@@ -8,20 +8,47 @@ Example payload : {[3, 5, 6, 1, 2, 16], [16, 6, 91, 1, 4, 3, 123, 1, 1]}
 
 Example response: 1, 3, 6, 16
 
-## Write rules:
-- Javascript, typescript or elixir
+## Solution
 
-## What we are judging:
-- Programming Logic
-- Unit Tests
-- Deploy flow
-- Performance
-- Organization & Cleanliness
-- Documentation
+### Code explanation
+This code runs a service built in [Express](https://expressjs.com/), that receives POST requests with a JSON body containing the two arrays, and returns a JSON containing the response array.
 
-## What can I use:
-Serverless Framework with NodeJS, Phoenix with Elixir, Docker for deploy start.
-Any framework, libs for unit tests.
+The POST request goes to index.js file, and its handled inside the express app.post() method.  
 
-## How to submit:
-Fork this repo and implement your solution. Then send us a pull request to this branch with your code.
+The arrays are extracted from the JSON body and are sent to the getPayload function, which gives the response array.
+
+At last the response array is sent to the client inside the field "response" of a JSON.
+
+### How to run it
+
+#### To run directly into your machine
+1. Clone the repository
+2. Run `npm install` or `yarn install`
+3. Run the service with `npm start` or `yarn start`
+
+#### To run it inside a docker container
+1. Clone the repository
+2. Run `docker-compose up`
+
+On default, it will run on port 3000. But you can change it by adding a PORT variable on the Dockerfile.
+You also need to change the EXPOSE command, and the ports property of the docker-compose.yml file to match port the new port.
+
+### How to use it
+Send a POST request to the service containing a JSON in the following body format:
+```
+{ 
+  "arr1": [The first array], 
+  "arr2": [The second array] 
+}
+```
+
+Ex:
+```
+curl -X POST -H "Content-Type: application/json" -d '{ "arr1": [3, 5, 6, 1, 2 , 16], "arr2": [16, 6, 91, 1, 4, 3, 123, 1, 1] }' [The service ip]:[choosen port (default: 3000)]
+```
+
+The service will responde with an JSON containing the response array. Ex: 
+`{"response":[1,3,6,16]}`
+
+### How to test it
+Just run `npm run-script test` or `yarn test` inside the app directory.
