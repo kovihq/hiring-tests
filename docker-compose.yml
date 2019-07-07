@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+  test-queue-message-array:
+    image: test-queue-message-array
+    build: .
+    environment:
+      NODE_ENV: production
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
