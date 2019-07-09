@@ -1,0 +1,18 @@
+service: hiring-test 
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+package:
+  include:
+      - src/helpers/*.js
+  exclude:
+      - node_modules/**
+
+functions:
+  intersect:
+    handler: src/functions/intersect.handler
+    reservedConcurrency: 3
+    events:
+      - sqs: arn:aws:sqs:us-east-1:278847435417:queue-test
