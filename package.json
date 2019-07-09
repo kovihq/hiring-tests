@@ -10,6 +10,6 @@
     "serverless": "1.46.1"
   },
   "scripts": {
-    "unit-test": "jest --config jest.config.js"
+    "unit-test": "jest --config jest.config.js" 
   }
 }
