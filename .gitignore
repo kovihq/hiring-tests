@@ -7,3 +7,4 @@ jspm_packages
 
 # Ignore Test Reports
 reports
+.stryker-tmp

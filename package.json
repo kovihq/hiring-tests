@@ -5,11 +5,16 @@
   "license": "MIT",
   "author": "Vitor Ferreira Garcia <vitfgarcia@gmail.com>",
   "devDependencies": {
+    "@stryker-mutator/core": "2.0.1",
+    "@stryker-mutator/html-reporter": "2.0.1",
+    "@stryker-mutator/javascript-mutator": "2.0.1",
+    "@stryker-mutator/jest-runner": "2.0.1",
     "jest": "24.8.0",
     "jest-html-reporters": "1.1.8",
     "serverless": "1.46.1"
   },
   "scripts": {
-    "unit-test": "jest --config jest.config.js" 
+    "unit-test": "jest --config jest.config.js",
+    "mutant-test": "stryker run"
   }
 }
