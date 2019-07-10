@@ -27,10 +27,10 @@ If you don't have docker installed, you can download form https://docs.docker.co
 
 To run via docker:
 
-###Under Windows
+### Under Windows
  - ./run.bat
 
-###Under Linux
+### Under Linux
  - ./run.sh
 
 Your application will be available at port 3000.
