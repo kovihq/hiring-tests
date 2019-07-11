@@ -27,11 +27,16 @@ If you don't have docker installed, you can download form https://docs.docker.co
 
 To run via docker:
 
+Execute the following command: ``docker pull raulsms/test-queue-message-array``
+
 ### Under Windows
  - ./run.bat
 
 ### Under Linux
  - ./run.sh
+
+Or just execute the image you pulled.
+Ex: ``docker run -p:3000:3000 -d raulsms/test-queue-message-array``
 
 Your application will be available at port 3000.
 
