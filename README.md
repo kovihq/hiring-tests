@@ -2,7 +2,7 @@
 
 Send payload with 2 arrays and it returns the common elements between those arrays in asc sorted
 
-Example payload : {[3, 5, 6, 1, 2, 16], [16, 6, 91, 1, 4, 3, 123, 1, 1]}
+Example payload : {"array1":[3,5,6,1,2,16],"array2":[16,6,91,1,4,3,123,1,1]}
 
 Example response: 1, 3, 6, 16
 
