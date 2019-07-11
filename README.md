@@ -50,3 +50,7 @@ The content of payload header must be json.
 
 To run test you simply run the ``npm run test`` command.
 
+
+
+
+Obs: It does not use Serveless framework due to lack of aws account.
