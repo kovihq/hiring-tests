@@ -1,0 +1,11 @@
+service: kovi-hiring-test
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: sa-east-1
+
+functions:
+  intersectAndAscending:
+    handler: handler.intersectAndAscending
+    # missing the process that will fire this function

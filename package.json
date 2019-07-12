@@ -1,0 +1,16 @@
+{
+  "name": "kovi-hiring-test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest --verbose",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "deploy": "serverless deploy -v"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "serverless": "^1.47.0",
+    "standard": "^13.0.1"
+  }
+}
