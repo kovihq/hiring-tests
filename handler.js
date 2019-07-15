@@ -1,18 +1,31 @@
 'use strict';
+const { intersect, validateBody } = require('./src/process');
 
-module.exports.hello = async event => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+const consumeQueue = async (event) => {
+	if (event.Records.length > 1) {
+		throw new Error('This function must consume only one message per execution');
+	}
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+	try {
+
+		const body = JSON.parse(event.Records[0].body);
+		if (!validateBody(body)) {
+			throw new Error();
+		}
+
+		return {
+			error: false,
+			response: intersect(body[0], body[1])
+		};
+	} catch (error) {
+		return {
+			error: true,
+			message: 'Invalid body',
+			body: event.Records[0].body
+		}
+	}
 };
+
+module.exports = {
+	consumeQueue
+}
