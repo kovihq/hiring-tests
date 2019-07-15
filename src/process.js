@@ -9,11 +9,11 @@ const Joi = require('joi');
  * @return {number[]}.
  */
 const intersect = (stArray, ndArray) => {
-    const [smallArray, biggerArray] = sortArrayBySizeAsc([stArray, ndArray]);
-    const ref = new Set(biggerArray);
-    return smallArray
-        .filter((item) => ref.has(item))
-        .sort();
+	const [smallArray, biggerArray] = sortArrayBySizeAsc([stArray, ndArray]);
+	const ref = new Set(biggerArray);
+	return smallArray
+		.filter((item) => ref.has(item))
+		.sort();
 }
 
 /**
@@ -22,12 +22,12 @@ const intersect = (stArray, ndArray) => {
  * @return {Array[]} - Sorted arrays.
  */
 const sortArrayBySizeAsc = (arrays) => arrays
-    .sort((prev, next) => prev.length - next.length);
+	.sort((prev, next) => prev.length - next.length);
 
 const bodySchema = Joi
-    .array()
-    .items(Joi.array().items(Joi.number()))
-    .length(2);
+	.array()
+	.items(Joi.array().items(Joi.number()))
+	.length(2);
 
 /**
  * Order arrays list by length.
@@ -37,7 +37,7 @@ const bodySchema = Joi
 const validateBody = (body) => !bodySchema.validate(body).error;
 
 module.exports = {
-    intersect,
-    sortArrayBySizeAsc,
-    validateBody
+	intersect,
+	sortArrayBySizeAsc,
+	validateBody
 } 
