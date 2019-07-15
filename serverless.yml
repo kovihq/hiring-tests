@@ -9,7 +9,7 @@ functions:
     handler: handler.consumeQueue
     events:
       - sqs:
-        arn: arn:aws:sqs:region:XXXXXX:myQueue
+        arn: ${env:SQS_ARN}
         batchSize: 1
 
 plugins:

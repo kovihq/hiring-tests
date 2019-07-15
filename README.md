@@ -1,5 +1,16 @@
 # Queue Message Array Challenge
 
+## Deploy
+Set your env variable `SQS_ARN` with the arn code of your queue and run the cmd:
+```
+make deploy
+```
+
+## Test
+```
+npm test
+```
+
 ## Problem:
 John receives a message with 2 arrays in his queue, filled with integer elements.
 John needs a function that receives only 2 arrays (arr1, arr2) from queue and returns only the elemens that are in both arrays asc sorted.

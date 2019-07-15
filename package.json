@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage",
     "deploy": "serverless deploy",
-    "watch": "serverless offline"
+    "watch": "serverless offline",
+    "config": "serverless config"
   },
   "repository": {
     "type": "git",
