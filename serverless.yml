@@ -1,0 +1,16 @@
+service: message-array
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+functions:
+  consume-queue:
+    handler: handler.consumeQueue
+    events:
+      - sqs:
+        arn: ${env:SQS_ARN}
+        batchSize: 1
+
+plugins:
+  - serverless-offline

@@ -1,0 +1,31 @@
+{
+  "name": "hiring-tests",
+  "version": "1.0.0",
+  "description": "## Problem: John receives a message with 2 arrays in his queue, filled with integer elements. John needs a function that receives only 2 arrays (arr1, arr2) from queue and returns only the elemens that are in both arrays asc sorted.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "deploy": "serverless deploy",
+    "watch": "serverless offline",
+    "config": "serverless config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunoventura/hiring-tests.git"
+  },
+  "author": "Bruno Ventura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brunoventura/hiring-tests/issues"
+  },
+  "homepage": "https://github.com/brunoventura/hiring-tests#readme",
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "serverless": "^1.47.0",
+    "serverless-offline": "^5.7.3"
+  },
+  "dependencies": {
+    "joi": "^14.3.1"
+  }
+}
