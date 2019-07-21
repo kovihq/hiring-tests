@@ -1,0 +1,28 @@
+{
+  "name": "kovi-test",
+  "version": "1.0.0",
+  "description": "Serverless webpack example using Typescript",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "offline": "serverless offline start",
+    "deployDev": "serverless deploy --stage dev --aws-profile aldebaran --mode=development"
+  },
+  "dependencies": {
+    "class-validator": "^0.9.1",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.1",
+    "@types/lodash": "^4.14.136",
+    "@types/node": "^8.0.57",
+    "serverless-offline": "^4.8.1",
+    "serverless-webpack": "^5.1.1",
+    "source-map-support": "^0.5.6",
+    "ts-loader": "^4.2.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.5.0"
+  },
+  "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
+  "license": "MIT"
+}
