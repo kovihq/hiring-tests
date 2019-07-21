@@ -1,5 +1,5 @@
-Aldebaran N. Souza
-email: baranbnt@gmail.com
+- Aldebaran N. Souza
+- email: baranbnt@gmail.com
 
 # Init project
 - After to do the clone of project, you must to execute the following command:
@@ -17,10 +17,11 @@ npm run offline
 - Before you to do the deploy configure the aws credentials.
 
 ```
-[dev] -->> it's required because the command that's mapping in the package.json has this profile, if you have another profile mapped, update the package.json
+[dev]
 aws_access_key_id=XXXXXXXXXXXX
 aws_secret_access_key=YYYYYYYYYYYYYYYY
 ```
+- [dev] -->> it's required because the command that's mapping in the package.json has this profile, if you have another profile mapped, update the package.json
 
 - After that you can execute the command
 ```
@@ -31,7 +32,8 @@ npm run deployDev
 - After deploy or startin aplication in offline mode, copying the URL and execute the following request.
 
 - The service will go to return an array with the numnber that there are in both arrays.
-POST - [URL]
+
+- POST - [URL]
 
 REQUEST
 ```
