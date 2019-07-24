@@ -6,7 +6,7 @@ provider:
   runtime: nodejs8.10
 
 functions:
-  hello:
+  kovi-test:
     handler: src/function/kovi-test.run
     events:
       - http:
@@ -16,3 +16,4 @@ functions:
 plugins:
   - serverless-webpack
   - serverless-offline
+  - serverless-mocha-plugin

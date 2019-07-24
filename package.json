@@ -4,13 +4,14 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "serverless invoke test",
     "offline": "serverless offline start",
     "deployDev": "serverless deploy --stage dev --aws-profile aldebaran --mode=development"
   },
   "dependencies": {
     "class-validator": "^0.9.1",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "serverless-mocha-plugin": "^1.10.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.1",
