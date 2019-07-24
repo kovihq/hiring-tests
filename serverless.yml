@@ -1,0 +1,19 @@
+service:
+  name: kovi-test
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  kovi-test:
+    handler: src/function/kovi-test.run
+    events:
+      - http:
+          method: post
+          path: kovi-test
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-mocha-plugin
