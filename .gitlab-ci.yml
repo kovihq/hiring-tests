@@ -1,0 +1,94 @@
+image: node:8.10
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  AWS_ACCESS_KEY_ID: AKIAJFIQQF47WSMFOFYA
+  AWS_SECRET_ACCESS_KEY: 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
+
+stages:
+  - test
+  - deploy
+  - e2e
+  - approvals
+  - production
+
+before_script:
+
+integration:
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay2
+    
+  services:
+    - docker:dind
+  stage: test
+  script:
+    - docker pull node:alpine
+    - docker pull semeietecnologies/node-dynamodblocal
+    - docker run --name nodedb -e UNMOCK=true -e STAGE=dev -e AWS_ACCESS_KEY_ID="AKIAJFIQQF47WSMFOFYA" -e AWS_SECRET_ACCESS_KEY="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"  -d -v "$PWD":/app -v /data:/data -p 8000:8000 semeietecnologies/node-dynamodblocal -dbPath /data -sharedDb
+    # versao local 
+    # - docker run --name nodedb -e DBLOCAL=http://localhost:8000 -e STAGE=dev -e AWS_ACCESS_KEY_ID="fakefornow" -e AWS_SECRET_ACCESS_KEY="fakefornow"  -d -v "$PWD":/app -v /data:/data -p 8000:8000 semeietecnologies/node-dynamodblocal -dbPath /data -sharedDb
+    - docker exec nodedb npm cache clear --force
+    - docker exec nodedb npm install --prefix /app
+    - docker exec nodedb npm run dynamodborm deploy t0.1.0 --prefix /app
+    - docker exec nodedb npm run tdd --prefix /app
+    # - docker exec nodedb npm test src/models/Runners/__tests__/Barcode.class.spec.js --prefix /app
+  environment: test
+  artifacts:
+    paths: [app/coverage]
+
+
+codequality:
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:dind
+  script:
+    - docker pull codeclimate/codeclimate 
+    - docker run -v /tmp/cc:/tmp/cc -v "$PWD":/code -v /var/run/docker.sock:/var/run/docker.sock codeclimate/codeclimate validate-config
+    - ls -lash $PWD
+    - echo $PWD
+    - docker run --env CODECLIMATE_CODE="$PWD" -v "$PWD":/code -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/cc:/tmp/cc codeclimate/codeclimate analyze -f json > gl-code-quality-report.json
+  environment: dev
+  artifacts:
+    paths: [gl-code-quality-report.json]
+
+deploy to dev:
+  stage: deploy
+  script:
+    - npm install -g serverless
+    - npm install
+    - make deploy
+  environment: dev
+
+e2e:
+  stage: e2e
+  script:
+    - npm install -g serverless
+    - npm install
+    - UNMOCK=true STAGE=dev npm run e2e
+  environment: dev
+  when: on_success
+
+approval:
+  stage: approvals
+  script:
+    - echo "aprovado deploy para producao"
+  allow_failure: false
+  environment: prod
+  when: manual
+  only: 
+    - master
+
+deploy to production:
+  stage: production
+  script:
+    - npm install -g serverless
+    - npm install
+    - make stage=prod deploy
+  environment: prod
+  when: on_success
+  only: 
+    - master

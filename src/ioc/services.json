@@ -1,0 +1,20 @@
+[
+    {
+        "path": "./presenter",
+        "name": "presenter",
+        "kind": "object",
+        "dependencies": [
+            "Presenter"
+        ]
+    },
+    {
+        "path": "../services/transaction.analyze",
+        "name": "confirmTransaction",
+        "kind": "function",
+        "dependencies": [
+            "getFinancialInstitutionIdFromJwtToken",
+            "TransactionDomainORM",	
+            "RunnerFactory"
+        ]
+    }
+]
