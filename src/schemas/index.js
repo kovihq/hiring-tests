@@ -1,4 +1,2 @@
-export * from './CreditCard'
-export * from './PaymentCard'
-export * from './StatusHistory'
-export * from './Address'
+export * from './MessageORM'
+export * from './StatusHistoryORM'
