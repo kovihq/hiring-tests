@@ -7,7 +7,6 @@ async function insertInQueue(
 }
 
 insertInQueue.inject = [
- 'parser'
 ]
 
 module.exports =  insertInQueue

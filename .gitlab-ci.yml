@@ -2,9 +2,6 @@ image: node:8.10
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  AWS_ACCESS_KEY_ID: AKIAJFIQQF47WSMFOFYA
-  AWS_SECRET_ACCESS_KEY: 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
-
 stages:
   - test
   - deploy
