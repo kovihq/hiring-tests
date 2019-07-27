@@ -7,45 +7,29 @@ const {
 } = require('./config')
   
 const {
-    PaymentCardModel,
-    CreditCardModel,
+    MessageModel,
     StatusHistoryModel,
-    AddressModel
 } = require('../models')
   
 const {
-    PaymentCardSchema,
-    CreditCardSchema,
+    MessageSchema,
     StatusHistorySchema,
-    AddressSchema
 } = require('../schemas')
   
-const DomainName = 'PaymentCardORM'
+const DomainName = 'MessageORM'
 
-function PaymentCardDomainProvider(container) {
+function MessageDomainProvider(container) {
     container.service(DomainName, c => {
         const aggregationRoot = new c.AggregationRoot(
             {
-                ModelClass: PaymentCardModel,
+                ModelClass: MessageModel,
                 tableName,
                 readCapacity,
                 writeCapacity,
                 indexes,
                 region,
-                className: 'PaymentCardORM',
-                schema: PaymentCardSchema
-            },
-            {
-                ModelClass: CreditCardModel,
-                schema: CreditCardSchema,
-                className: 'CreditCardORM',
-                key: 'creditCards'
-            },
-            {
-                ModelClass: AddressModel,
-                schema: AddressSchema,
-                className: 'AddressORM',
-                key: 'addresses'
+                className: 'MessageORM',
+                schema: MessageSchema
             },
             {
                 ModelClass: StatusHistoryModel,
@@ -59,6 +43,6 @@ function PaymentCardDomainProvider(container) {
     })
 }
 
-PaymentCardDomainProvider.DomainName = DomainName
-module.exports = PaymentCardDomainProvider
+MessageDomainProvider.DomainName = DomainName
+module.exports = MessageDomainProvider
   
