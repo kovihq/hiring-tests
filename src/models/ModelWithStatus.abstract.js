@@ -1,7 +1,7 @@
 import { Model } from '@spark/dynamodborm'
 
 export class ModelWithStatus extends Model {
-    changeStatus({ status, ...others}) {
+    changeStatus(status, others) {
         this.status = status
         const historyPayload = {
             status,

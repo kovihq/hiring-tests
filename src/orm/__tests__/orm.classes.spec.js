@@ -1,13 +1,10 @@
 const container = require('@spark/services-container')
-const { 
-    default: dynamoDBORMProvider
-} = require('@spark/dynamodborm/lib/provider')
+const {default: DynamoDBORMProvider} = require('@spark/dynamodborm/lib/provider')
+const messageOrmDomain = require('../')
+const { DomainName } = messageOrmDomain
 
-const domainProvider = require('../')
-const { DomainName } = domainProvider
-
-dynamoDBORMProvider(container)
-domainProvider(container)
+DynamoDBORMProvider(container)
+container.register(messageOrmDomain)
 
 const Domain = container[DomainName]
 

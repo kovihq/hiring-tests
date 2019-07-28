@@ -11,10 +11,7 @@
     "dev": "./node_modules/.bin/babel src -d package -w  --ignore \"src/**/__tests__/*\",\"src/**/__mocks__/*\"",
     "offline": "serverless offline start -s dev",
     "test": "./node_modules/.bin/jest --runInBand ",
-    "unit": "./node_modules/.bin/jest --runInBand .unit",
-    "spec": "./node_modules/.bin/jest --runInBand .spec",
-    "tdd": "./node_modules/.bin/jest --runInBand .unit .spec",
-    "e2e": "./node_modules/.bin/jest --runInBand .e2e"
+    "tdd": "./node_modules/.bin/jest --watch .unit .spec"
   },
   "keywords": [
     "orm",

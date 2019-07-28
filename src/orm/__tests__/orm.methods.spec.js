@@ -2,7 +2,6 @@ const v4 = require('uuid/v4')
 const container = require('@spark/services-container')
 const {default: DynamoDBORMProvider} = require('@spark/dynamodborm/lib/provider')
 const messageOrmDomain = require('../')
-const { keccak256 } = require('js-sha3')
 const { DomainName } = messageOrmDomain
 
 DynamoDBORMProvider(container)
@@ -21,6 +20,7 @@ describe('ORM methods', () => {
                 'get',
                 'set',
                 'save',
+                '_save',
                 'delete',
                 'update',
                 'validate',
@@ -70,14 +70,28 @@ describe('ORM methods', () => {
 
     })
 
-    describe.only('Message operations', () => {
+    describe('Message operations', () => {
         // creating a new with input
             // should have a messageId
         test('creating a message with input should also set the message id', () => {
             const message = new MessageORM({input: [[1], [1]]})
             expect(message).toHaveProperty('messageId', '1|1')
         })
-        // 
+
+        test('saving a message should validate itself', async done => {
+            const message = new MessageORM({messageId: 'mock'})
+            return message.save().then(done).catch(err => {
+                return done()
+            })
+        }, 3000)
+
+        test('changeStatus method should also add a statusHistory item in statusHistory', () => {
+            const message = new MessageORM({messageId: 'mock'})
+            message.changeStatus(`mock`)
+            expect(message).toHaveProperty('status', 'mock')
+            expect(message).toHaveProperty('statusHistory')
+            expect(message.statusHistory[0]).toHaveProperty('status', 'mock')
+        })
     })
     // test('MessageORM update method')
     
