@@ -2,7 +2,7 @@ const services = require('../ioc')
 
 const {
 	presenter,
-	chargePaymentCard,
+	saveMessageInput,
 } = services
 
 
@@ -10,16 +10,15 @@ const {
 async function handler(event, context, callback) {
 	const {
 		body,
-		headers: {
-			Authorization,
-			authorization
-		},
 	} = event
-	const jwtToken = Authorization || authorization
 	try {
-		const payload = await chargePaymentCard(body, jwtToken)
-		console.log('->', payload)
-		return callback(null, presenter.succeeded(payload))
+		const [code ,payload] = await saveMessageInput(body)
+		console.log('code', code)
+		console.log('payload', payload)
+		return callback(null, presenter.succeeded({
+			status: code === 'saved' ? 201 : 200,
+			data: payload
+		}))
 	} catch (error) {
 		console.log('>!<', error)
 		return callback(presenter.failed(error))

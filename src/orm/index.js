@@ -5,17 +5,17 @@ const {
     writeCapacity,
     indexes
 } = require('./config')
-  
+
 const {
     MessageModel,
     StatusHistoryModel,
 } = require('../models')
-  
+
 const {
     MessageSchema,
     StatusHistorySchema,
 } = require('../schemas')
-  
+
 const DomainName = 'MessageORM'
 
 function MessageORM(AggregationRoot) {
@@ -45,4 +45,3 @@ MessageORM.autoCall = true
 MessageORM.DomainName = DomainName
 
 module.exports = MessageORM
-  

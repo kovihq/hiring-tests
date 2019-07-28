@@ -1,20 +1,20 @@
-const awsXRay = require('aws-xray-sdk')
-const AWS = awsXRay.captureAWS(require('aws-sdk'))
+// const awsXRay = require('aws-xray-sdk')
+// const AWS = awsXRay.captureAWS(require('aws-sdk'))
 const container = require('@spark/services-container')
+const { Presenter } = require('@spark/utils/lib/Presenter')
 const { default: DynamoDBORMProvider } = require('@spark/dynamodborm/lib/provider')
 
-const HelpersProvider = require('./helpers')
-const PresenterProvider = require('../helpers/presenter')
-MessagesntCardORMProvider = require('../orm')
+const presenter = require('../helpers/presenter')
+const messageORM = require('../orm')
 
-const chargeService = require( '../services/charge')
-
-container.register(chargeService)
-
+const saveMessageInput = require( '../services/saveMessageInput')
 DynamoDBORMProvider(container)
-MessagesORMProvider(container)
-HelpersProvider(container)
-PresenterProvider(container)
+
+container.register(presenter)
+container.register(messageORM)
+container.register(saveMessageInput)
+container.service(`Presenter`, () => Presenter)
+
 
 console.log('container', container)
 module.exports = container

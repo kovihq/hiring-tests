@@ -34,15 +34,6 @@ custom:
       QUEUE_URL: https://sqs.us-east-1.amazonaws.com/739649310064/error-sns-accounts-events.fifo
   serverless-offline:
     port: 3030
-  # authorizer:
-  #   prod2:
-  #     ${cf:api-auth-authorizer-prod2.JwtTokenAuthorizerLambdaFunctionQualifiedArn}
-  #   staging:
-  #     ${cf:api-auth-authorizer-staging.JwtTokenAuthorizerLambdaFunctionQualifiedArn}
-  #   dev:
-  #     ${cf:api-auth-authorizer-dev.JwtTokenAuthorizerLambdaFunctionQualifiedArn}
-  #   sandbox:
-  #     ${cf:api-auth-authorizer-sandbox.JwtTokenAuthorizerLambdaFunctionQualifiedArn}
 
 provider:
   environment: ${self:custom.settings.${self:custom.myStage}}
@@ -79,17 +70,6 @@ provider:
       Resource:
         - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.TRANSACTIONS_TABLE}"
         - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.TRANSACTIONS_TABLE}/*"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.ACCOUNTS_TABLE}"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.ACCOUNTS_TABLE}/*"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.PRIVATE_LABEL_ACCOUNTS_TABLE}"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.PRIVATE_LABEL_ACCOUNTS_TABLE}/*"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.PAYMENT_ACCOUNTS_TABLE}"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.PAYMENT_ACCOUNTS_TABLE}/*"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.CLIENTS_TABLE}"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.CLIENTS_TABLE}/*"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.PAYMENT_ACCOUNT_BALANCE_HISTORIES_TABLE}"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.PAYMENT_ACCOUNT_BALANCE_HISTORIES_TABLE}/*"
-
     - Effect: Allow
       Action:
         - SNS:Publish
@@ -114,10 +94,10 @@ functions: # TODO: change the handlers
   #           topicName: "${self:custom.topic}"
   #           displayName: transa-evt
   endpointPostInsertInque:
-    handler: endpoints/postIDcharges.handler
+    handler: endpoints/post.handler
     events:
       - http:
-          path: /{id}/charges
+          path: /
           method: post 
           authorizer:
             arn: "${self:custom.authorizer.${self:custom.myStage}}"
@@ -137,64 +117,69 @@ functions: # TODO: change the handlers
                     pattern: '^.*[4][0][0].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"
+                      Content-Type: "'application/json'"
+                200:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                    pattern: '^.*[2][0][0].*$' # JSON response
+                    template: $input.path("$.errorMessage") # JSON return object
+                    headers:
+                      Content-Type: "'application/json'"
                 401:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     pattern: '^.*[4][0][1].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"
+                      Content-Type: "'application/json'"
                 403:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     pattern: '^.*[4][0][3].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"
+                      Content-Type: "'application/json'"
                 404:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     pattern: '^.*[4][0][4].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"
+                      Content-Type: "'application/json'"
                 422:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     pattern: '^.*[4][2][2].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"  
+                      Content-Type: "'application/json'"  
                 500:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     pattern: '^.*[5][0][0].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"                     
+                      Content-Type: "'application/json'"                     
                 503:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     pattern: '^.*[5][0][3].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"            
+                      Content-Type: "'application/json'"            
                 504:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
                     pattern: '^.*[5][0][4].*$' # JSON response
                     template: $input.path("$.errorMessage") # JSON return object
                     headers:
-                       Content-Type: "'application/json'"            
+                      Content-Type: "'application/json'"            
           request:
             template:
               application/json: '{
-                 "method": "$context.httpMethod",
-                 "body" : $input.json(''$''),
-                 "headers": {
-                   #foreach($param in $input.params().header.keySet())
-                     "$param": "$util.escapeJavaScript($input.params().header.get($param))" #if($foreach.hasNext),#end
-                   #end
-                 },
-                 "queryParams": {
-                   #foreach($param in $input.params().querystring.keySet())
-                     "$param": "$util.escapeJavaScript($input.params().querystring.get($param))" #if($foreach.hasNext),#end
-                   #end
-                 },
-                 "pathParams": {
-                   #foreach($param in $input.params().path.keySet())
-                     "$param": "$util.escapeJavaScript($input.params().path.get($param))" #if($foreach.hasNext),#end
-                   #end
-                 }
-               }'
- 
+                  "method": "$context.httpMethod",
+                  "body" : $input.json(''$''),
+                  "headers": {
+                    #foreach($param in $input.params().header.keySet())
+                      "$param": "$util.escapeJavaScript($input.params().header.get($param))" #if($foreach.hasNext),#end
+                    #end
+                  },
+                  "queryParams": {
+                    #foreach($param in $input.params().querystring.keySet())
+                      "$param": "$util.escapeJavaScript($input.params().querystring.get($param))" #if($foreach.hasNext),#end
+                    #end
+                  },
+                  "pathParams": {
+                    #foreach($param in $input.params().path.keySet())
+                      "$param": "$util.escapeJavaScript($input.params().path.get($param))" #if($foreach.hasNext),#end
+                    #end
+                  }
+                }'
+
 resources:
     Resources:
       GatewayResponseDefault4XX:

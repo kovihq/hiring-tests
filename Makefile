@@ -51,7 +51,7 @@ offline:
 	cp package.json package/ && \
 	cp serverless.yml ./package/ && \
 	cd package/ && npm install --production --no-bin-links && \
-	serverless offline -s $(stage)
+	../node_modules/.bin/serverless offline -s $(stage)
 
 run:
 	make _check_run_start_or_attach
