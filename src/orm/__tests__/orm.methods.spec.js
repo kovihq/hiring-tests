@@ -1,19 +1,21 @@
-import v4 from 'uuid/v4'
-import container from '@spark/services-container'
-import DynamoDBORMProvider from '@spark/dynamodborm/lib/provider'
-import DomainProvider, { DomainName } from '../'
-import { keccak256 } from 'js-sha3'
+const v4 = require('uuid/v4')
+const container = require('@spark/services-container')
+const DynamoDBORMProvider = require('@spark/dynamodborm/lib/provider')
+const DomainProvider = require('../')
+const { keccak256 } = require('js-sha3')
+const { DomainName } = DomainProvider
 
 DynamoDBORMProvider(container)
 DomainProvider(container)
+
 const Domain = container[DomainName]
 const retrieve = []
 
-describe('paymentCard save operations', () => {
+describe('MessageORM save', () => {
 
-    it('should create a specific paymentCard all fields', async done => {
+    it('should create a specific message all fields', async done => {
         expect.assertions(1)
-        const { parseFields, StatusHistoryORM, PaymentCardORM } = Domain
+        const { StatusHistoryORM, MessageORM } = Domain
 
         const data = parseFields({
             'financialInstitutionId': v4(),
@@ -27,34 +29,34 @@ describe('paymentCard save operations', () => {
             'embossingName': 'Antonio Carlos'
         })
 
-        const paymentCard = new PaymentCardORM(data)
+        const message = new MessageORM(data)
 
-        paymentCard.changeStatus({ 'status': 'pending' })
+        message.changeStatus({ 'status': 'pending' })
 
         try {
-            await paymentCard.validate()
+            await message.validate()
         } catch (err) {
             console.log('erro de validacao: ', err)
             console.log('000', Object.keys(err))
         }
 
         try {
-            await paymentCard.save()
-            expect(paymentCard).toBeDefined()
+            await message.save()
+            expect(message).toBeDefined()
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
         }
     
-        retrieve.push({ 'id': paymentCard.id })
+        retrieve.push({ 'id': message.id })
 
         return done()
 
     }, 50000)
 
-    it('should create a paymentCard all fields required', async done => {
+    it('should create a message all fields required', async done => {
         expect.assertions(1)
-        const { parseFields, CreditCardORM, StatusHistoryORM, PaymentCardORM } = Domain
+        const { parseFields, CreditCardORM, StatusHistoryORM, MessageORM } = Domain
         const data = parseFields({
             'financialInstitutionId': v4(),
             'accountId': v4(),
@@ -71,35 +73,35 @@ describe('paymentCard save operations', () => {
             'last4Digits': '1234'
         })
 
-        const paymentCard = new PaymentCardORM(data)
+        const message = new MessageORM(data)
 
-        paymentCard.addItem('creditCards', creditCardItem)
-        paymentCard.changeStatus({ 'status': 'pending' })
+        message.addItem('creditCards', creditCardItem)
+        message.changeStatus({ 'status': 'pending' })
 
         try {
-            await paymentCard.validate()
+            await message.validate()
         } catch (err) {
             console.log('erro de validacao: ', err)
             console.log('000', Object.keys(err))
         }
 
         try {
-            await paymentCard.save()
-            expect(paymentCard).toBeDefined()
+            await message.save()
+            expect(message).toBeDefined()
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
         }
 
-        retrieve.push({ 'id': paymentCard.id })
+        retrieve.push({ 'id': message.id })
 
         return done()
 
     }, 50000)
 
-    it('should create a paymentCard fields with paymentCard parent', async done => {
+    it('should create a message fields with message parent', async done => {
         expect.assertions(1)
-        const { parseFields, CreditCardORM, StatusHistoryORM, PaymentCardORM } = Domain
+        const { parseFields, CreditCardORM, StatusHistoryORM, MessageORM } = Domain
         const data = parseFields({
             'financialInstitutionId': v4(),
             'accountId': v4(),
@@ -112,36 +114,36 @@ describe('paymentCard save operations', () => {
             'embossingName': 'Antonio Carlos'
         })
 
-        const paymentCard = new PaymentCardORM(data)
+        const message = new MessageORM(data)
 
-        paymentCard.changeStatus({ 'status': 'pending' })
+        message.changeStatus({ 'status': 'pending' })
 
         try {
-            await paymentCard.validate()
+            await message.validate()
         } catch (err) {
             console.log('erro de validacao: ', err)
             console.log('000', Object.keys(err))
         }
 
         try {
-            await paymentCard.save()
-            expect(paymentCard).toBeDefined()
+            await message.save()
+            expect(message).toBeDefined()
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
         }
 
-        retrieve.push({ 'id': paymentCard.id })
+        retrieve.push({ 'id': message.id })
 
         return done()
 
     }, 50000)
 
-    it('should create a paymentCard  fields with creditCard', async done => {
+    it('should create a message  fields with creditCard', async done => {
 
         expect.assertions(1)
 
-        const { parseFields, CreditCardORM, StatusHistoryORM, PaymentCardORM } = Domain
+        const { parseFields, CreditCardORM, StatusHistoryORM, MessageORM } = Domain
         const data = parseFields({
             'financialInstitutionId': v4(),
             'accountId': v4(),
@@ -154,9 +156,9 @@ describe('paymentCard save operations', () => {
             'embossingName': 'Antonio Carlos'
         })
 
-        const paymentCard = new PaymentCardORM(data)
+        const message = new MessageORM(data)
 
-        paymentCard.changeStatus({ 'status': 'pending' })
+        message.changeStatus({ 'status': 'pending' })
 
         const creditCardItem = new CreditCardORM({
             'cardNumber': '0001234567890',
@@ -167,37 +169,37 @@ describe('paymentCard save operations', () => {
 
         creditCardItem.bin = parseInt(creditCardItem.cardNumber).toString().substring(0,6)
 
-        paymentCard.addItem('creditCards', creditCardItem)
+        message.addItem('creditCards', creditCardItem)
 
         try {
-            await paymentCard.validate()
+            await message.validate()
         } catch (err) {
             console.log('erro de validacao: ', err)
             console.log('000', Object.keys(err))
         }
 
         try {
-            await paymentCard.save()
-            expect(paymentCard).toBeDefined()
+            await message.save()
+            expect(message).toBeDefined()
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
         }
 
-        retrieve.push({ 'id': paymentCard.id })
+        retrieve.push({ 'id': message.id })
         return done()
 
     }, 50000)
 
 })
 
-describe('paymentCard get operations', () => {
+describe('message get operations', () => {
   
-    it('should retrieve a paymentCard with Id', async done => {
+    it('should retrieve a message with Id', async done => {
 
         expect.assertions(1)
 
-        const { parseFields, Repository, PaymentCardORM } = Domain
+        const { parseFields, Repository, MessageORM } = Domain
 
         const data = parseFields({
             'financialInstitutionId': v4(),
@@ -211,30 +213,30 @@ describe('paymentCard get operations', () => {
             'embossingName': 'Antonio Carlos'
         })
 
-        const paymentCard = new PaymentCardORM(data)
+        const message = new MessageORM(data)
 
-        paymentCard.changeStatus({ 'status': 'pending' })
+        message.changeStatus({ 'status': 'pending' })
 
         try {
-            await paymentCard.validate()
+            await message.validate()
         } catch (err) {
             console.log('erro de validacao: ', err)
             console.log('000', Object.keys(err))
         }
 
         try {
-            await paymentCard.save()
+            await message.save()
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
         }
 
-        retrieve.push({ 'id': paymentCard.id })
+        retrieve.push({ 'id': message.id })
 
         try {
-            const paymentCardAux = await Repository.get({ 'id': paymentCard.id, 'index': 'id-index' })
+            const messageAux = await Repository.get({ 'id': message.id, 'index': 'id-index' })
 
-            expect(paymentCardAux).toBeInstanceOf(PaymentCardORM)
+            expect(messageAux).toBeInstanceOf(MessageORM)
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
@@ -242,10 +244,10 @@ describe('paymentCard get operations', () => {
         return done()
     }, 50000)
 
-    it('should retrieve a paymentCard with accountId', async done => {
+    it('should retrieve a message with accountId', async done => {
         expect.assertions(1)
 
-        const { parseFields, Repository, PaymentCardORM } = Domain
+        const { parseFields, Repository, MessageORM } = Domain
 
         const data = parseFields({
             'financialInstitutionId': v4(),
@@ -259,31 +261,31 @@ describe('paymentCard get operations', () => {
             'embossingName': 'Antonio Carlos'
         })
 
-        const paymentCard = new PaymentCardORM(data)
+        const message = new MessageORM(data)
 
-        paymentCard.changeStatus({ 'status': 'pending' })
+        message.changeStatus({ 'status': 'pending' })
 
         try {
-            await paymentCard.validate()
+            await message.validate()
         } catch (err) {
             console.log('erro de validacao: ', err)
             console.log('000', Object.keys(err))
         }
 
         try {
-            await paymentCard.save()
+            await message.save()
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
         }
 
-        retrieve.push({ 'id': paymentCard.id })
+        retrieve.push({ 'id': message.id })
 
         try {
-            const paymentCardAux = await Repository.get({
-                'accountId': paymentCard.accountId, 'index': 'accountId-id-index' })
+            const messageAux = await Repository.get({
+                'accountId': message.accountId, 'index': 'accountId-id-index' })
 
-            expect(paymentCardAux).toBeInstanceOf(PaymentCardORM)
+            expect(messageAux).toBeInstanceOf(MessageORM)
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
@@ -292,10 +294,10 @@ describe('paymentCard get operations', () => {
     }, 50000)
 })
 
-describe('paymentCard update operations', () => {
+describe('message update operations', () => {
  
-    it('should retrieve a paymentCard with Id', async done => {
-        const { parseFields, Repository, PaymentCardORM } = Domain
+    it('should retrieve a message with Id', async done => {
+        const { parseFields, Repository, MessageORM } = Domain
         const data = parseFields({
             'financialInstitutionId': v4(),
             'accountId': v4(),
@@ -308,46 +310,46 @@ describe('paymentCard update operations', () => {
             'embossingName': 'Antonio Carlos'
         })
 
-        const paymentCard = new PaymentCardORM(data)
+        const message = new MessageORM(data)
 
-        paymentCard.changeStatus({ 'status': 'pending' })
+        message.changeStatus({ 'status': 'pending' })
 
         try {
-            await paymentCard.validate()
+            await message.validate()
         } catch (err) {
             console.log('erro de validacao: ', err)
             console.log('000', Object.keys(err))
         }
         try {
-            await paymentCard.save()
+            await message.save()
         } catch (err) {
             console.log('erro ao salvar: ', err)
             console.log('000', Object.keys(err))
         }
 
-        retrieve.push({ 'id': paymentCard.id })
+        retrieve.push({ 'id': message.id })
 
-        paymentCard.org = '9999'
-        paymentCard.logo = '9999'
-        paymentCard.dueDate = 15
-        paymentCard.codeProposal = '9999999999'
-        paymentCard.dateProposal = (new Date()).toISOString()
-        paymentCard.privateLabelAccountId = '9999'
-        paymentCard.updatedAt = (new Date()).toISOString()
+        message.org = '9999'
+        message.logo = '9999'
+        message.dueDate = 15
+        message.codeProposal = '9999999999'
+        message.dateProposal = (new Date()).toISOString()
+        message.privateLabelAccountId = '9999'
+        message.updatedAt = (new Date()).toISOString()
     
-        await paymentCard._save()
+        await message._save()
 
-        const paymentCardUpdated = await Repository.get({ 'id': paymentCard.id, 'index': 'id-index' })
+        const messageUpdated = await Repository.get({ 'id': message.id, 'index': 'id-index' })
 
-        expect(paymentCardUpdated).toBeInstanceOf(PaymentCardORM)
+        expect(messageUpdated).toBeInstanceOf(MessageORM)
 
-        expect(paymentCardUpdated.org).toEqual(paymentCard.org)
-        expect(paymentCardUpdated.logo).toEqual(paymentCard.logo)
-        expect(paymentCardUpdated.dueDate).toEqual(paymentCard.dueDate)
-        expect(paymentCardUpdated.codeProposal).toEqual(paymentCard.codeProposal)
-        expect(paymentCardUpdated.dateProposal).toEqual(paymentCard.dateProposal)
-        expect(paymentCardUpdated.privateLabelAccountId).toEqual(paymentCard.privateLabelAccountId)
-        expect(paymentCardUpdated.updatedAt).toEqual(paymentCard.updatedAt)
+        expect(messageUpdated.org).toEqual(message.org)
+        expect(messageUpdated.logo).toEqual(message.logo)
+        expect(messageUpdated.dueDate).toEqual(message.dueDate)
+        expect(messageUpdated.codeProposal).toEqual(message.codeProposal)
+        expect(messageUpdated.dateProposal).toEqual(message.dateProposal)
+        expect(messageUpdated.privateLabelAccountId).toEqual(message.privateLabelAccountId)
+        expect(messageUpdated.updatedAt).toEqual(message.updatedAt)
     
         return done()
 
@@ -355,14 +357,14 @@ describe('paymentCard update operations', () => {
 
 })
 
-describe('paymentCard delete operations', () => {
-    it('should delete a paymentCard with Id', async done => {
+describe('message delete operations', () => {
+    it('should delete a message with Id', async done => {
         const { Repository } = Domain
 
         retrieve.forEach(async({ id }) => {
-            const paymentCard = await Repository.get({ 'id': id, 'index': 'id-index' })
+            const message = await Repository.get({ 'id': id, 'index': 'id-index' })
 
-            await paymentCard.delete()
+            await message.delete()
         })
         return done()
     }, 50000)
