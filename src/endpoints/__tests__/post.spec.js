@@ -7,9 +7,9 @@ describe('Post handler', () => {
         const event = {
             body: [[1],[1]]
         }
-        return post(event, {}, async (err, payload)=> {
-            const {status, data} = JSON.parse(payload)
+        return post(event, {}, async payload => {
             console.log('@payload', payload)
+            const {status, data} = JSON.parse(payload)
 
             expect(status).toBe(202)
             expect(data).toHaveProperty('createdAt')
@@ -21,13 +21,13 @@ describe('Post handler', () => {
         
     }, 30000)
     test('should return a message in data and status 200', (done) => {
-        const messageAlredySaved = new MessageORM({input: [[1],[1]], status: 'sending_to_db'})
+        const messageAlredySaved = new MessageORM({input: [[1],[2]], status: 'sending_to_db'})
         return messageAlredySaved.save()
         .then(() => {
             const event = {
-                body: [[1],[1]]
+                body: [[1],[2]]
             }
-            return post(event, {}, async (err, payload)=> {
+            return post(event, {}, async (payload)=> {
                 console.log('@payload', payload)
                 const {status, data} = JSON.parse(payload)
                 expect(status).toBe(200)
@@ -45,9 +45,9 @@ describe('Post handler', () => {
             const event = {
                 body: [[true],[1]]
             }
-            return post(event, {}, async (err, payload)=> {
+            return post(event, {}, async (payload)=> {
             console.log('@payload', payload)
-            const {status, code, errors} = JSON.parse(err)
+            const {status, code, errors} = JSON.parse(payload)
                 expect(status).toBe(422)
                 expect(code).toMatch('invalid_payload')
                 expect(errors).toBeInstanceOf(Array)

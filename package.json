@@ -36,7 +36,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.4.4",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
-    "babel-jest": "^24.7.1",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.5",
     "bluebird": "^3.5.4",
     "concurrently": "^3.6.0",
@@ -45,17 +45,17 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-mocha": "^5.0.0",
     "husky": "^0.15.0-rc.8",
-    "jest": "^24.7.1",
-    "line-by-line": "^0.1.6",
-    "jest-cli": "^24.7.1",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
     "json-loader": "^0.5.3",
+    "line-by-line": "^0.1.6",
     "line-stream-util": "^1.2.0",
+    "serverless": "^1.48.4",
     "serverless-domain-manager": "^2.3.6",
     "serverless-import-swagger": "^0.1.0",
     "serverless-offline": "^3.25.6",
-    "supertest": "^3.1.0",
     "serverless-plugin-tracing": "^2.0.0",
-    "serverless": "^1.32.0"
+    "supertest": "^3.1.0"
   },
   "jest": {
     "testEnvironment": "node",
@@ -64,6 +64,9 @@
     "transform": {
       "^.+\\.js?$": "<rootDir>/node_modules/babel-jest"
     },
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
     "coverageReporters": [
       "json",
       "lcov",
@@ -80,10 +83,10 @@
     "@babel/runtime-corejs2": "^7.4.4",
     "@spark/dynamodborm": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/dynamodborm.git#feature/without-babel-for-infra-all-together",
     "@spark/services-container": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/services-container.git#develop",
-    "@spark/utils": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/utils.git#develop",
-    "aws-sdk": "^2.275.1",
+    "aws-sdk": "^2.501.0",
     "aws-xray-sdk": "^2.3.3",
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "babel-runtime": "^6.26.0"
   },
   "bugs": {
     "url": "https://github.com/LucasBadico/hiring-tests/issues"
