@@ -8,10 +8,12 @@ const presenter = require('../helpers/presenter')
 const messageORM = require('../orm')
 
 const saveMessageInput = require( '../services/saveMessageInput')
+const showMessage = require( '../services/showMessage')
 DynamoDBORMProvider(container)
 
 container.register(presenter)
 container.register(messageORM)
+container.register(showMessage)
 container.register(saveMessageInput)
 container.service(`Presenter`, () => Presenter)
 

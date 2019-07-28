@@ -2,19 +2,20 @@ const services = require('../ioc')
 
 const {
 	presenter,
-	chargePaymentCard,
+	showMessage,
 } = services
 
 
 // handler
 async function handler(event, context, callback) {
 	const {
-		body,
+		pathParams: { messageid },
 	} = event
 	try {
-		const payload = await chargePaymentCard(body)
+		console.log("messageid", messageid.replace('%7C', '|'))
+		const payload = await showMessage(messageid.replace('%7C', '|'))
 		console.log('->', payload)
-		return callback(null, presenter.succeeded(payload))
+		return callback(presenter.succeeded({status: 200, data: payload }))
 	} catch (error) {
 		console.log('>!<', error)
 		return callback(presenter.failed(error))
