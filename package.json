@@ -1,7 +1,7 @@
 {
-  "name": "@spark/domain-payment-card",
+  "name": "@spark/domain-messages",
   "version": "1.0.0",
-  "description": "the payment-card service of SPARK",
+  "description": "the messages services",
   "main": "handler.js",
   "scripts": {
     "babel": "./node_modules/.bin/babel-node",
@@ -82,11 +82,7 @@
     "@babel/runtime": "^7.4.4",
     "@babel/runtime-corejs2": "^7.4.4",
     "@spark/accounts-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/accounts-client.git#v0.5.0.alpha.1",
-    "@spark/domain-account": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/domain-account.git#v0.5.0.alpha.1",
-    "@spark/domain-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/domain-client.git#v0.3.1.alpha.1",
-    "@spark/domain-payment-account": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/domain-payment-account.git#v0.5.1.alpha.1",
-    "@spark/domain-private-label-account": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/domain-private-label-account.git#v0.3.1.alpha.1",
-    "@spark/dynamodborm": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/dynamodborm.git#feature/new-infra-all-together",
+    "@spark/dynamodborm": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/dynamodborm.git#feature/without-babel-for-infra-all-together",
     "@spark/orbitall-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/orbitall-client.git#v0.1.0.alpha.1",
     "@spark/parse-fields": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/parse-fields.git#develop",
     "@spark/payment-accounts-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/payment-accounts-client.git#v0.1.0.alpha.1",
@@ -108,11 +104,11 @@
     "url-join": "^4.0.0"
   },
   "bugs": {
-    "url": "https://gitlab.com/spark-team/payment-cards/issues"
+    "url": "https://github.com/LucasBadico/hiring-tests/issues"
   },
-  "homepage": "https://gitlab.com/spark-team/payment-cards#README",
+  "homepage": "https://github.com/LucasBadico/hiring-tests#README",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/spark-team/payment-cards.git"
+    "url": "git+ssh://git@github.com:LucasBadico/hiring-tests.git"
   }
 }

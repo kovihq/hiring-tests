@@ -18,31 +18,31 @@ const {
   
 const DomainName = 'MessageORM'
 
-function MessageDomainProvider(container) {
-    container.service(DomainName, c => {
-        const aggregationRoot = new c.AggregationRoot(
-            {
-                ModelClass: MessageModel,
-                tableName,
-                readCapacity,
-                writeCapacity,
-                indexes,
-                region,
-                className: 'MessageORM',
-                schema: MessageSchema
-            },
-            {
-                ModelClass: StatusHistoryModel,
-                schema: StatusHistorySchema,
-                className: 'StatusHistoryORM',
-                key: 'statusHistory'
-            }
-        )
-
-        return aggregationRoot
-    })
+function MessageORM(AggregationRoot) {
+    return new AggregationRoot(
+        {
+            ModelClass: MessageModel,
+            tableName,
+            readCapacity,
+            writeCapacity,
+            indexes,
+            region,
+            className: 'MessageORM',
+            schema: MessageSchema
+        },
+        {
+            ModelClass: StatusHistoryModel,
+            schema: StatusHistorySchema,
+            className: 'StatusHistoryORM',
+            key: 'statusHistory'
+        }
+    )
 }
+MessageORM.inject = [
+    'AggregationRoot'
+]
+MessageORM.autoCall = true
+MessageORM.DomainName = DomainName
 
-MessageDomainProvider.DomainName = DomainName
-module.exports = MessageDomainProvider
+module.exports = MessageORM
   
