@@ -33,7 +33,7 @@ export const MessageSchema = hasToBe => ({
         type: 'Any',
         validator: hasToBe.array().items(
             hasToBe.number()
-        ).required()
+        )
     },
     statusReason: {
         type: 'String',

@@ -80,34 +80,104 @@ describe('ORM classes', () => {
             {
                 className: 'Model',
                 ClassDefinition: Model,
-                kind: 'is required',
-                validations: [
+                errorType: 'must be a number',
+                cases: [
                     {
-                        data: {},
-                        field: 'messageId',
-                        description: '"messageId" is required'
-                    }
+                        data: { input: [['a']] },
+                        field: 'input',
+                    },
+                    {
+                        data: { output: ['a'] },
+                        field: 'output',
+                    },
                 ]
             },
+            // {
+            //     className: 'Model',
+            //     ClassDefinition: Model,
+            //     errorType: 'must be an array',
+            //     cases: [
+            //         {
+            //             data: { input: ['a'] },
+            //             field: 'input',
+            //         },
+            //         {
+            //             data: { output: 'a' },
+            //             field: 'output',
+            //         },
+            //         {
+            //             data: { statusHistory: 'a' },
+            //             field: 'statusHistory',
+            //         },
+            //     ]
+            // },
+            // {
+            //     className: 'Model',
+            //     ClassDefinition: Model,
+            //     errorType: 'is required',
+            //     cases: [
+            //         {
+            //             data: {},
+            //             field: 'messageId',
+            //         },
+            //         {
+            //             data: {},
+            //             field: 'status',
+            //         },
+            //         {
+            //             data: {},
+            //             field: 'input',
+            //         },
+            //     ]
+            // },
+            // {
+            //     className: 'MessageORM',
+            //     ClassDefinition: MessageORM,
+            //     errorType: 'is required',
+            //     cases: [
+            //         {
+            //             data: {},
+            //             field: 'messageId',
+            //         },
+            //         {
+            //             data: {},
+            //             field: 'status',
+            //         },
+            //         {
+            //             data: {},
+            //             field: 'input',
+            //         },
+            //     ]
+            // },
+            // {
+            //     className: 'StatusHistoryORM',
+            //     ClassDefinition: StatusHistoryORM,
+            //     errorType: 'is required',
+            //     cases: [
+            //         {
+            //             data: {},
+            //             field: 'status',
+            //         },
+            //     ]
+            // },
         ]
         tests.map(({
             className,
-            kind,
+            errorType,
             ClassDefinition,
-            validations,
+            cases,
         }) => describe(className, () => {
-             validations.map(({
+             cases.map(({
                  data,
-                 description,
                  field,
-             }) => test(`"${field}" ${kind}`, (done) => {
+             }) => test(`"${field}" ${errorType}`, (done) => {
                  console.log(data)
                 const instance = new ClassDefinition(data)
                 return instance.validate().catch(err => {
                     console.log(err)
                     expect(err.code).toMatch('ValidationError')
-                    expect(err.errors.find(({identifier}) => identifier === field).message)
-                        .toMatch(`"${field}" ${kind}`)
+                    expect(err.errors.find(({identifier}) => identifier.match(field)).message)
+                        .toMatch(errorType)
                     return done()
                 })
              }))
