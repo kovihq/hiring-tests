@@ -76,6 +76,8 @@
     "verbose": true
   },
   "dependencies": {
+    "@babel/runtime": "^7.4.4",
+    "@babel/runtime-corejs2": "^7.4.4",
     "@spark/dynamodborm": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/dynamodborm.git#feature/without-babel-for-infra-all-together",
     "@spark/services-container": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/services-container.git#develop",
     "@spark/utils": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/utils.git#develop",
