@@ -76,29 +76,12 @@
     "verbose": true
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.4",
-    "@babel/runtime-corejs2": "^7.4.4",
-    "@spark/accounts-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/accounts-client.git#v0.5.0.alpha.1",
     "@spark/dynamodborm": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/dynamodborm.git#feature/without-babel-for-infra-all-together",
-    "@spark/orbitall-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/orbitall-client.git#v0.1.0.alpha.1",
-    "@spark/parse-fields": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/parse-fields.git#develop",
-    "@spark/payment-accounts-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/payment-accounts-client.git#v0.1.0.alpha.1",
-    "@spark/private-label-accounts-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/private-label-accounts-client.git#v0.1.0.alpha.1",
     "@spark/services-container": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/services-container.git#develop",
-    "@spark/topaz-client": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/topaz-client.git#v0.1.0",
-    "@spark/utils": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/utils.git#v0.15.0.alpha.1",
-    "aes256": "^1.0.4",
+    "@spark/utils": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/utils.git#develop",
     "aws-sdk": "^2.275.1",
     "aws-xray-sdk": "^2.3.3",
-    "axios": "^0.18.0",
-    "finity": "^0.5.4",
-    "form-data": "^2.3.3",
-    "js-sha3": "^0.8.0",
-    "jwk-to-pem": "^2.0.0",
-    "node-fetch": "^2.2.0",
-    "short-uuid": "^3.1.1",
-    "strong-soap": "^1.14.0",
-    "url-join": "^4.0.0"
+    "axios": "^0.18.0"
   },
   "bugs": {
     "url": "https://github.com/LucasBadico/hiring-tests/issues"

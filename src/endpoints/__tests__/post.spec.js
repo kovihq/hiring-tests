@@ -3,7 +3,7 @@ const services = require('../../ioc')
 const { handler: post } = require('../post')
 const { MessageORM: {MessageORM}} = services
 describe('Post handler', () => {
-    test('should return a message in data and status 201', (done) => {
+    test('should return a message in data and status 202', (done) => {
         const event = {
             body: [[1],[1]]
         }
@@ -11,7 +11,7 @@ describe('Post handler', () => {
             const {status, data} = JSON.parse(payload)
             console.log('@payload', payload)
 
-            expect(status).toBe(201)
+            expect(status).toBe(202)
             expect(data).toHaveProperty('createdAt')
             expect(data).toHaveProperty('updatedAt')
             const message2delete = new MessageORM({messageId: '1|1'})

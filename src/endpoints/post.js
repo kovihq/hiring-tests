@@ -14,9 +14,9 @@ async function handler(event, context, callback) {
 	try {
 		const [code ,payload] = await saveMessageInput(body)
 		console.log('code', code)
-		console.log('payload', payload)
+		console.log('payload', JSON.stringify(payload));
 		return callback(null, presenter.succeeded({
-			status: code === 'saved' ? 201 : 200,
+			status: code === 'saved' ? 202 : 200,
 			data: payload
 		}))
 	} catch (error) {

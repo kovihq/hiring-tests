@@ -2,7 +2,7 @@ function presenter(Presenter) {
   console.log(Presenter)
   const p = new Presenter({})
   p.register('links', {
-    'self':({messageId}) => ({
+    'self':({data: { messageId}}) => ({
       method: 'GET',
       href: `/${messageId}`
     })
