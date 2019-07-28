@@ -20,18 +20,7 @@ custom:
         - ":${self:custom.mobileTopic}"
   settings:
     dev:
-      TRANSACTION_EVENTS_TOPIC: ${self:custom.topicArn}
-      PUSH_MOBILE_TOPIC: ${self:custom.mobileTopicArn}
-      TRANSACTIONS_TABLE: payment-cards-dev
-      CLIENTS_TABLE: clients-dev
-      ACCOUNTS_TABLE: accounts-dev
-      PRIVATE_LABEL_ACCOUNTS_TABLE: private-label-accounts-dev
-      PAYMENT_ACCOUNTS_TABLE: payment-accounts-dev
-      PAYMENT_ACCOUNT_BALANCE_HISTORIES_TABLE: payment-account-balance-histories-dev
-      STAGE: ${self:custom.myStage}
-      TOPIC_ACC_EVT: arn:aws:sns:us-east-1:739649310064:accounts-events-dev
-      TOPIC_TRNSCT_EVT: arn:aws:sns:us-east-1:739649310064:payment-cards-events-dev
-      QUEUE_URL: https://sqs.us-east-1.amazonaws.com/739649310064/error-sns-accounts-events.fifo
+      MESSAGES_TABLE: 'messages-dev'
   serverless-offline:
     port: 3030
 
@@ -68,16 +57,8 @@ provider:
         - dynamodb:DeleteItem
         - dynamodb:ListStreams
       Resource:
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.TRANSACTIONS_TABLE}"
-        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.TRANSACTIONS_TABLE}/*"
-    - Effect: Allow
-      Action:
-        - SNS:Publish
-        - SNS:ListSubscriptions
-        - SNS:setSubscriptionAttributes
-      Resource:
-        - "${self:custom.topicArn}"
-        - "${self:custom.mobileTopicArn}"
+        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.MESSAGES_TABLE}"
+        - "arn:aws:dynamodb:us-east-1:*:table/${self:custom.settings.${self:custom.myStage}.MESSAGES_TABLE}/*"
 
 layers:
   commonLibs:
