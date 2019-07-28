@@ -7,7 +7,7 @@ export const MessageSchema = hasToBe => ({
             'status-messageId-index': 'HASH'
         },
         validator: hasToBe.string().valid(
-            'pending',
+            'sending_to_db',
             'processing',
             'created',
             'error'
