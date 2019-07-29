@@ -1,14 +1,14 @@
 const services = require('../ioc')
 
 const {
-	presenter,
-    saveMessageOutput,
+    MessageORM: {Repository},
     processMessage
 } = services
 
 
 async function handler(event, context, callback) {
     console.log('all record: ',  JSON.stringify(event, null, 2))
+    
     const records = event.Records.reduce((list, record) => {
         if(record.eventName === 'INSERT') {
             return [
