@@ -1,0 +1,99 @@
+{
+  "name": "@spark/domain-messages",
+  "version": "1.0.0",
+  "description": "the messages services",
+  "main": "handler.js",
+  "scripts": {
+    "babel": "./node_modules/.bin/babel-node",
+    "deploy": "make deploy",
+    "dynamodborm": "npm run babel ./node_modules/.bin/dynamodborm",
+    "build": "./node_modules/.bin/babel src -d package  --ignore \"src/**/__tests__/*\",\"src/**/__mocks__/*\"",
+    "dev": "./node_modules/.bin/babel src -d package -w  --ignore \"src/**/__tests__/*\",\"src/**/__mocks__/*\"",
+    "offline": "serverless offline start -s dev",
+    "test": "./node_modules/.bin/jest --runInBand ",
+    "tdd": "./node_modules/.bin/jest --watch .unit .spec"
+  },
+  "keywords": [
+    "orm",
+    "dynamodb",
+    "repository",
+    "poc"
+  ],
+  "author": "@spark-team",
+  "license": "ISC",
+  "devDependencies": {
+    "@aws/dynamodb-data-mapper": "^0.7.2",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-private-methods": "^7.4.4",
+    "@babel/plugin-transform-async-to-generator": "^7.4.4",
+    "@babel/plugin-transform-classes": "^7.4.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.5",
+    "bluebird": "^3.5.4",
+    "concurrently": "^3.6.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-mocha": "^5.0.0",
+    "husky": "^0.15.0-rc.8",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "json-loader": "^0.5.3",
+    "line-by-line": "^0.1.6",
+    "line-stream-util": "^1.2.0",
+    "serverless": "^1.48.4",
+    "serverless-domain-manager": "^2.3.6",
+    "serverless-import-swagger": "^0.1.0",
+    "serverless-offline": "^3.25.6",
+    "serverless-plugin-tracing": "^2.0.0",
+    "supertest": "^3.1.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage/",
+    "transform": {
+      "^.+\\.js?$": "<rootDir>/node_modules/babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "setupFiles": [
+      "./setup.js"
+    ],
+    "verbose": true
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.4.4",
+    "@babel/runtime-corejs2": "^7.4.4",
+    "@spark/dynamodborm": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/dynamodborm.git#feature/without-babel-for-infra-all-together",
+    "@spark/services-container": "git+https://spark-team:5vshkHjZBsCgvsyrxtRp@gitlab.com/spark-team/services-container.git#develop",
+    "aws-sdk": "^2.501.0",
+    "aws-xray-sdk": "^2.3.3",
+    "axios": "^0.18.0",
+    "babel-runtime": "^6.26.0"
+  },
+  "bugs": {
+    "url": "https://github.com/LucasBadico/hiring-tests/issues"
+  },
+  "homepage": "https://github.com/LucasBadico/hiring-tests#README",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:LucasBadico/hiring-tests.git"
+  }
+}
