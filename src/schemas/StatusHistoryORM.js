@@ -3,8 +3,8 @@ export const StatusHistorySchema = hasToBe => ({
         'type': 'String',
         'validator': hasToBe.string().valid(
             'sending_to_db',
-            'processing',
-            'created',
+            'proccessing_output',
+            'message_processed',
             'error'
         ).required()
     }

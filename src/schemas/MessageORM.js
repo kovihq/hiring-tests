@@ -8,8 +8,8 @@ export const MessageSchema = hasToBe => ({
         },
         validator: hasToBe.string().valid(
             'sending_to_db',
-            'processing',
-            'created',
+            'proccessing_output',
+            'message_processed',
             'error'
         ).required()
     },

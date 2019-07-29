@@ -232,7 +232,12 @@ functions: # TODO: change the handlers
                     #end
                   }
                 }'
-
+  streamDynamodb:
+    handler: consumers/stream-dynamodb.handler
+    events:
+      - stream:
+          type: dynamodb
+          arn: arn:aws:dynamodb:us-east-1:464022323563:table/messages-dev/stream/2019-07-29T00:17:35.167
 resources:
     Resources:
       GatewayResponseDefault4XX:

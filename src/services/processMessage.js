@@ -1,5 +1,4 @@
 function processMessage({
-    messageId,
     input:[arr1, arr2]
 }) {
     const isInBoth = arr => (list, item) => arr.indexOf(item) >= 0

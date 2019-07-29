@@ -3,8 +3,10 @@ function presenter(Presenter) {
   const p = new Presenter({})
   p.register('links', {
     'self':({data: { messageId}}) => ({
-      method: 'GET',
-      href: `/${messageId}`
+      self: {
+        method: 'GET',
+        href: `/${messageId}`
+      }
     })
   })
   return p
