@@ -9,12 +9,14 @@ const presenter = require('../helpers/presenter.instance');
 const messageORM = require('../orm')
 
 const saveMessageInput = require( '../services/saveMessageInput')
+const proccessMessage = require( '../services/proccessMessage')
 const showMessage = require( '../services/showMessage')
 DynamoDBORMProvider(container)
 
 container.register(presenter)
 container.register(messageORM)
 container.register(showMessage)
+container.register(proccessMessage)
 container.register(saveMessageInput)
 container.service(`Presenter`, () => Presenter)
 
