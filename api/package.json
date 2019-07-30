@@ -1,0 +1,51 @@
+{
+    "name": "test-queue-message-array",
+    "version": "0.0.1",
+    "description": "Test menagin a queue message array",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pablolopesk8/hiring-tests"
+    },
+    "keywords": [
+        "queue",
+        "array",
+        "test"
+    ],
+    "license": "MIT",
+    "author": "Pablo Lopes",
+    "main": "index.js",
+    "bugs": {
+        "url": "https://github.com/pablolopesk8/hiring-tests/issues"
+    },
+    "homepage": "https://github.com/pablolopesk8/hiring-tests#readme",
+    "scripts": {
+        "start": "node src/index.js",
+        "start:dev": "nodemon src/index.js",
+        "test": "mocha --recursive --no-timeouts",
+        "test:watch": "mocha --watch --recursive --no-timeouts",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "ajv": "^6.10.2",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.0.0",
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "eslint": "^5.16.0",
+        "mocha": "^6.1.4",
+        "nodemon": "^1.19.1",
+        "should": "^13.2.3",
+        "sinon": "^7.3.2",
+        "supertest": "^4.0.2"
+    },
+    "nodemonConfig": {
+        "restartable": "rs",
+        "ignore": [
+            "node_modules/**/node_modules",
+            "tests/*/**",
+            "*.postman_collection.json"
+        ]
+    }
+}
