@@ -1,0 +1,8 @@
+.git
+.vscode
+.gitignore
+node_modules
+npm-debug.log
+docker
+*.md
+*.postman_collection.json

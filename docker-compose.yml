@@ -1,0 +1,11 @@
+version: '3'
+services:
+    api:
+        container_name: queue-message-array-api
+        build:
+            context: .
+            dockerfile: ./docker/node/Dockerfile
+        volumes:
+            - ./api/:/usr/src/app
+        ports:
+            - 3000:3000
