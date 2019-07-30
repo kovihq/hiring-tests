@@ -3,7 +3,7 @@
  */
 const should = require('should'); // eslint-disable-line
 const sinon = require('sinon');
-const queueMessageController = require('../../src/controllers/queue.message.controller');
+const queueMessageController = require('../../src/controllers/queue-message.controller');
 
 describe('Controller Queue Message Test', () => {
     it(`Should return status 422 if doens't has param 'array1'`, async () => {
@@ -13,7 +13,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(422).should.equal(true);
         res.send.calledWith(`param 'array1' is required`).should.equal(true);
@@ -25,7 +25,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(422).should.equal(true);
         res.send.calledWith(`param 'array2' is required`).should.equal(true);
@@ -37,7 +37,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(422).should.equal(true);
         res.send.calledWith(`param 'array1' must be an array of int values`).should.equal(true);
@@ -49,7 +49,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(422).should.equal(true);
         res.send.calledWith(`param 'array2' must be an array of int values`).should.equal(true);
@@ -61,7 +61,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(422).should.equal(true);
         res.send.calledWith(`param 'array1' must be an array of int values`).should.equal(true);
@@ -73,7 +73,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(422).should.equal(true);
         res.send.calledWith(`param 'array2' must be an array of int values`).should.equal(true);
@@ -85,7 +85,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(204).should.equal(true);
     });
@@ -96,7 +96,7 @@ describe('Controller Queue Message Test', () => {
         }};
         const res = { status: sinon.spy(), send: sinon.spy() };
 
-        await queueMessageController.getEqualElements(req, res);
+        await queueMessageController.getEqualElementsOnArrays(req, res);
 
         res.status.calledWith(200).should.equal(true);
     });
