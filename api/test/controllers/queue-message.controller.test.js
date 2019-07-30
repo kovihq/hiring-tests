@@ -40,7 +40,7 @@ describe('Controller Queue Message Test', () => {
         await queueMessageController.getEqualElements(req, res);
 
         res.status.calledWith(422).should.equal(true);
-        res.send.calledWith(`param 'array1' must be an array`).should.equal(true);
+        res.send.calledWith(`param 'array1' must be an array of int values`).should.equal(true);
     });
     it(`Should return status 422 if second param is not an array`, async () => {
         const req = { body: {
@@ -52,7 +52,7 @@ describe('Controller Queue Message Test', () => {
         await queueMessageController.getEqualElements(req, res);
 
         res.status.calledWith(422).should.equal(true);
-        res.send.calledWith(`param 'array2' must be an array`).should.equal(true);
+        res.send.calledWith(`param 'array2' must be an array of int values`).should.equal(true);
     });
     it(`Should return status 422 if has one item not int in the first array`, async () => {
         const req = { body: {
@@ -64,7 +64,7 @@ describe('Controller Queue Message Test', () => {
         await queueMessageController.getEqualElements(req, res);
 
         res.status.calledWith(422).should.equal(true);
-        res.send.calledWith('all items in first array must be int number').should.equal(true);
+        res.send.calledWith(`param 'array1' must be an array of int values`).should.equal(true);
     });
     it(`Should return status 422 if has one item not int in the second array`, async () => {
         const req = { body: {
@@ -76,7 +76,7 @@ describe('Controller Queue Message Test', () => {
         await queueMessageController.getEqualElements(req, res);
 
         res.status.calledWith(422).should.equal(true);
-        res.send.calledWith('all items in seconde array must be int number').should.equal(true);
+        res.send.calledWith(`param 'array2' must be an array of int values`).should.equal(true);
     });
     it('Should return status 204 if params is ok and no one of items exists in both arrays', async () => {
         const req = { body: {
