@@ -16,7 +16,7 @@ server.use(bodyParser.json());
 const config = require('./config');
 
 // Get routers
-
+const queueMessageRouter = require('./routers/queue-message.router');
 
 // use CORS to avoid errors when accessing in localhost chrome
 server.use(cors());
@@ -27,7 +27,7 @@ server.get('/', (req, res) => {
 });
 
 // use routers
-
+server.use('/queue-message', queueMessageRouter);
 
 // start server on the port defined by env
 server.app = server.listen(config.portApi, () => {

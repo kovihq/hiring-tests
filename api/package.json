@@ -44,7 +44,7 @@
         "restartable": "rs",
         "ignore": [
             "node_modules/**/node_modules",
-            "tests/**",
+            "tests/*/**",
             "*.postman_collection.json"
         ]
     }
