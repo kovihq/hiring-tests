@@ -8,7 +8,7 @@ const GetEqualElements = async (array1, array2) => {
     if (array1.length <= 0 || array2.length <= 0) {
         return [];
     }
-    
+
     // get the greater and minor of two arrays, 
     // to do the verification iterating on minor and comparing with greater
     let minorArray, greaterArray;
@@ -29,8 +29,8 @@ const GetEqualElements = async (array1, array2) => {
     }
 
     // get the keys of map and order for return, if it's necessary
-    const equalArray = Object.keys(equalElements);
-    return equalArray.length > 0 ? equalArray.sort() : equalArray;
+    const equalArray = Object.values(equalElements);
+    return equalArray.length > 0 ? equalArray.sort((a, b) => a - b) : equalArray;
 }
 
 module.exports = { GetEqualElements };
