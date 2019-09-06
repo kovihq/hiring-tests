@@ -1,0 +1,12 @@
+service: hiring-tests
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+functions:
+  sort:
+    handler: handler.sort
+
+plugins:
+  - serverless-mocha-plugin
