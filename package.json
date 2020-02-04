@@ -1,0 +1,20 @@
+{
+  "name": "array-common-elements-raul",
+  "version": "1.0.0",
+  "description": "Return common elements from 2 arrays received via http payload request",
+  "main": "index.js",
+  "directories": {
+    "test": "test/*.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "jest": "^24.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "author": "Raul Souza",
+  "license": "ISC"
+}
