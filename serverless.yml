@@ -1,0 +1,10 @@
+service: queue-message-array-challenge
+provider:
+  name: aws
+  runtime: nodejs12.x
+functions:
+  arrayChallenge:
+    handler: handler.arrayChallenge
+    events:
+      - sns:
+        arn: arn:xxx

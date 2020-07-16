@@ -1,0 +1,101 @@
+    
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/repo
+commands:
+  autotag:
+    steps:
+      - run: 
+          name: Get autotag
+          command: | 
+            apt-get install wget git -y \
+            && wget -O autotag https://github.com/pantheon-systems/autotag/releases/download/1.1.1/Linux \
+            && chmod +x autotag \
+            && mv autotag /usr/local/bin/
+jobs:
+  run-tests:
+    <<: *defaults
+    docker:
+    - image: circleci/node:12.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: |
+            npm install
+      - run:
+          name: Run Tests
+          command: npm run test
+      - save_cache:
+          key: v1-dependencies-
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  release-vesion:
+    <<: *defaults
+    docker:
+    - image: google/cloud-sdk
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - cb:02:ef:14:9f:6b:61:5e:f0:2c:32:ea:ad:23:b9:26
+      - attach_workspace:
+          at: .
+      - autotag
+      - run:
+          name: Create Version
+          command: autotag > current_version || autotag 2>&1
+      - run:
+          name: Known Hosts
+          command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      - run:
+          name: Tag Git Version
+          command: git tag $(cat current_version) && git push origin $(cat current_version)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  deploy:
+    <<: *defaults
+    docker:
+    - image: circleci/node:12.0
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install Serverless CLI
+          command: sudo npm i -g serverless
+      - run:
+          name: Deploy
+          command: |
+            sls deploy
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - run-tests
+
+      - release-vesion:
+          requires:
+            - run-tests
+          filters:
+            branches:
+              only:
+                - master
+
+      - deploy:
+          context: LIVE
+          requires:
+            - release-vesion
+          filters:
+            branches:
+              only:
+                - master
