@@ -4,7 +4,7 @@ test('Should be valid', () => {
     expect(handler.bothElements([3, 5, 6, 1, 2, 16], [16, 6, 91, 1, 4, 3, 123, 1, 1])).resolves.toStrictEqual([1, 3, 6, 16])
     expect(handler.bothElements([1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12])).resolves.toStrictEqual([])
     expect(handler.bothElements([-1, -2, -3], [-1, -2, -3])).resolves.toStrictEqual([-3, -2, -1])
-    expect(handler.arrayChallenge({
+    expect(handler.handler({
         "Records": [
             {
                 "messageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
@@ -29,9 +29,9 @@ test('Should be valid', () => {
 });
 
 test('Should be throw error', () => {
-    expect(handler.arrayChallenge(undefined)).resolves.toThrow
-    expect(handler.arrayChallenge({})).resolves.toThrow
-    expect(handler.arrayChallenge(
+    expect(handler.handler(undefined)).resolves.toThrow
+    expect(handler.handler({})).resolves.toThrow
+    expect(handler.handler(
         {
             "Records": [
                 {

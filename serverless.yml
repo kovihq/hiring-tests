@@ -2,9 +2,25 @@ service: queue-message-array-challenge
 provider:
   name: aws
   runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sqs:*
+      Resource:
+        - Fn::GetAtt: [ challenge, Arn ]
 functions:
-  arrayChallenge:
-    handler: handler.arrayChallenge
+  challenge:
+    handler: handler.handler
     events:
-      - sns:
-        arn: arn:xxx
+      - sqs:
+        arn:
+          Fn::GetAtt:
+            - challenge
+            - Arn
+
+resources:
+  Resources:
+    challenge:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: challenge

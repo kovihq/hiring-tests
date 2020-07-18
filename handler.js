@@ -15,7 +15,7 @@ module.exports.bothElements = async (arr1, arr2) => {
 }
 
 
-module.exports.arrayChallenge = async event => {
+module.exports.handler = async event => {
   try {
     for (const record of event.Records) {
 

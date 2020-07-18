@@ -45,7 +45,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - cb:02:ef:14:9f:6b:61:5e:f0:2c:32:ea:ad:23:b9:26
+            - 8b:95:ed:74:e0:9f:58:b5:0c:49:45:a2:3d:35:bf:48
       - attach_workspace:
           at: .
       - autotag
@@ -75,7 +75,7 @@ jobs:
       - run:
           name: Deploy
           command: |
-            sls deploy
+            sls deploy -v
 
 workflows:
   version: 2
@@ -92,7 +92,6 @@ workflows:
                 - master
 
       - deploy:
-          context: LIVE
           requires:
             - release-vesion
           filters:
