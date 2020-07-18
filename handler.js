@@ -16,11 +16,16 @@ module.exports.bothElements = async (arr1, arr2) => {
 
 
 module.exports.arrayChallenge = async event => {
-  const body = event
-
   try {
-    return await this.bothElements(a, b);
-  } catch (error) {
+    for (const record of event.Records) {
+
+      //parse string to JSON
+      var obj = JSON.parse(record.body);
+
+      var result = await this.bothElements(obj.arr1, obj.arr2);
+
+      return result
+    }  } catch (error) {
     return error
   }
 };
